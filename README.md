@@ -8,38 +8,39 @@ libxml2's `xmllint` command for use in the browser or node.
 
 ```javascript
 
-Object xmllint.validateXML({
-	xml: "String",
-	schema: "String" || ["String", "String", ...]
-});
+xmllint.validateXML(arguments, files);
 
 ```
 
-The return value Object has one property `errors` which is either null,
-in the case of no errors, or an Array of error strings....eg:
+`arguments` is an array of arguments to pass to xmllint.
+
+`files` is an array of objects, each with a `path` and `data` property. These will be turned into pseudo-filesystem objects for xmllint to access.
+
+The return value Object has two properties: 'stdout' and 'stderr':
 
 ```javascript
 
-if (!xmllint.validateXML(opts).errors) {
+if (!xmllint.validateXML(arguments, files).stderr) {
 	//there were no errors.
 }
 
 ```
 
-Usable with Browserify via `browserify-shim`.
-
 #### Building xmllint from source ####
 
-Install emscripten.
+[Install the Emscripten SDK](https://kripken.github.io/emscripten-site/docs/getting_started/downloads.html).
 
 ```
 	git clone
 	git submodule init
 	git submodule update
-	./script/clean
-	./script/libxml2
-	./script/compile
-	./script/test
-```
 
-There are also equivalent `gulp` tasks.
+	npm install
+
+	source ../emscripten_portable/emsdk_env.sh
+
+	gulp clean
+	gulp libxml2
+	gulp compile
+	gulp test
+```
