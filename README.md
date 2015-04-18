@@ -8,11 +8,11 @@ libxml2's `xmllint` command for use in the browser or node.
 
 ```javascript
 
-xmllint.validateXML(arguments, files);
+xmllint.validateXML(args, files);
 
 ```
 
-`arguments` is an array of arguments to pass to xmllint.
+`args` is an array of arguments to pass to xmllint.
 
 `files` is an array of objects, each with a `path` and `data` property. These will be turned into pseudo-filesystem objects for xmllint to access.
 
@@ -20,7 +20,7 @@ The return value Object has two properties: 'stdout' and 'stderr':
 
 ```javascript
 
-if (!xmllint.validateXML(arguments, files).stderr) {
+if (!xmllint.validateXML(args, files).stderr) {
 	//there were no errors.
 }
 
