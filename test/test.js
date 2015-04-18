@@ -19,8 +19,8 @@ statusNode.textContent = 'Fetching DTD files…';
 
 var fetchIndex = fetchFile('index.txt', filesRoot).then(function(file) {
 	return file.data.trim().split('\n').filter(function(line) {
-        return line;
-    });
+		return line;
+	});
 });
 
 var fetchFiles = fetchIndex.then(function(files) {
@@ -38,15 +38,15 @@ var fetchFiles = fetchIndex.then(function(files) {
 fetchFiles.then(function(files) {
 	statusNode.textContent = 'Validating XML…';
 
-    var args = ['--noent', '--dtdvalid', dtdPath, xmlPath];
+	var args = ['--noent', '--dtdvalid', dtdPath, xmlPath];
 
-    var output = xmllint(args, files);
+	var output = xmllint(args, files);
 
-    if (output.stderr) {
+	if (output.stderr) {
 		statusNode.textContent = 'Validation errors:';
-        document.getElementById('lint').textContent = output.stderr;
-    } else {
+		document.getElementById('lint').textContent = output.stderr;
+	} else {
 		statusNode.textContent = 'Valid!';
-        document.getElementById('xml').textContent = output.stdout;
-    }
+		document.getElementById('xml').textContent = output.stdout;
+	}
 });
