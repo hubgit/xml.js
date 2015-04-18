@@ -1,20 +1,24 @@
-Module['preRun'] = function () {
-	files.forEach(function(file) {
-		var parts = file.path.split('/');
+// https://kripken.github.io/emscripten-site/docs/api_reference/module.html
 
-		// create the folder if needed
-		if (parts.length > 1) {
-			FS.createPath('/', parts.slice(0, -1).join('/'), true, true);
-		}
+var Module = {
+	arguments: args || [],
+	preRun: function () {
+		files.forEach(function(file) {
+			// create the folder if needed
+			var parts = file.path.split('/');
 
-		FS.createDataFile('/', file.path, Module['intArrayFromString'](file.data), true, true);
-	});
-};
+			if (parts.length > 1) {
+				FS.createPath('/', parts.slice(0, -1).join('/'), true, true);
+			}
 
-Module['stdout'] = function (code) {
-	output.stdout += String.fromCharCode(code);
-};
-
-Module['stderr'] = function (code) {
-	output.stderr += String.fromCharCode(code);
+			// create the file
+			FS.createDataFile('/', file.path, Module['intArrayFromString'](file.data), true, true);
+		});
+	},
+	stdout: function (code) {
+		stdout += String.fromCharCode(code);
+	},
+	stderr: function (code) {
+		stderr += String.fromCharCode(code);
+	}
 };

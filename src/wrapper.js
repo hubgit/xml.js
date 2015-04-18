@@ -1,17 +1,11 @@
-var xmllint = {};
-
-xmllint.validateXML = function (args, files) {
-	var Module = {
-		arguments: args || [],
-		files: files || []
-	};
-
-	var output = {
-		stdout: '',
-		stderr: ''
-	};
+var xmllint = function (args, files) {
+	var stdout = '',
+		stderr = '';
 
 	/* XMLLINT.RAW.JS */
 
-	return output;
+	return {
+		stdout: stdout,
+		stderr: stderr,
+	};
 }

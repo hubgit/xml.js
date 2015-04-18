@@ -10,4 +10,4 @@ sed '/\/\* XMLLINT.RAW.JS \*\// {
 	d
 }' < ./src/wrapper.js > ./xmllint.js
 
-rm -rf xmllint.raw.js
+rm xmllint.raw.js
