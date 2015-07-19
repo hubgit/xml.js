@@ -8,7 +8,7 @@ libxml2's `xmllint` command for use in the browser or node.
 
 ```javascript
 
-xmllint.validateXML(args, files);
+xmllint(args, files);
 
 ```
 
@@ -20,7 +20,7 @@ The return value Object has two properties: 'stdout' and 'stderr':
 
 ```javascript
 
-if (!xmllint.validateXML(args, files).stderr) {
+if (!xmllint(args, files).stderr) {
 	//there were no errors.
 }
 
