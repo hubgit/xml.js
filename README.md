@@ -28,19 +28,19 @@ if (!xmllint(args, files).stderr) {
 
 #### Building xmllint from source ####
 
-[Install the Emscripten SDK](https://kripken.github.io/emscripten-site/docs/getting_started/downloads.html).
+1. [Install the Emscripten SDK](https://kripken.github.io/emscripten-site/docs/getting_started/downloads.html).
+2. Run the following commands in this repository:
 
-```
-	git clone
-	git submodule init
-	git submodule update
+```sh
+git submodule init
+git submodule update
 
-	npm install
+npm install
 
-	source ../emscripten_portable/emsdk_env.sh
+source ../emscripten_portable/emsdk_env.sh
 
-	gulp clean
-	gulp libxml2
-	gulp compile
-	gulp test
+gulp clean
+gulp libxml2
+gulp compile
+gulp test
 ```
