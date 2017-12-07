@@ -37,7 +37,7 @@ git submodule update
 
 npm install
 
-source ../emscripten_portable/emsdk_env.sh
+source ../emsdk_portable/emsdk_env.sh
 
 gulp clean
 gulp libxml2
