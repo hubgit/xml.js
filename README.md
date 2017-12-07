@@ -30,16 +30,17 @@ Usable with Browserify via `browserify-shim`.
 
 #### Building xmllint from source ####
 
-Install emscripten.
+1. Install emscripten.
+2. Run the following commands in this repository:
 
-```
-	git clone
-	git submodule init
-	git submodule update
-	./script/clean
-	./script/libxml2
-	./script/compile
-	./script/test
+```sh
+git submodule init
+git submodule update
+
+./script/clean
+./script/libxml2
+./script/compile
+./script/test
 ```
 
 There are also equivalent `gulp` tasks.
