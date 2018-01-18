@@ -26,17 +26,21 @@ var fetchFiles = fetchIndex.then(files => {
 })
 
 fetchFiles.then(files => {
-	statusNode.textContent = 'Validating XML…';
+	statusNode.textContent = 'Loading WASM…';
 
-	var args = ['--noent', '--dtdvalid', dtdPath, xmlPath];
+	loadWasm.then(() => {
+		statusNode.textContent = 'Validating XML…';
 
-	var output = xmllint(args, files);
+		var args = ['--noent', '--dtdvalid', dtdPath, xmlPath];
 
-	if (output.stderr) {
-		statusNode.textContent = 'Validation errors:';
-		document.getElementById('lint').textContent = output.stderr;
-	} else {
-		statusNode.textContent = 'Valid!';
-		document.getElementById('xml').textContent = output.stdout;
-	}
+		var output = xmllint(args, files);
+
+		if (output.stderr) {
+			statusNode.textContent = 'Validation errors:';
+			document.getElementById('lint').textContent = output.stderr;
+		} else {
+			statusNode.textContent = 'Valid!';
+			document.getElementById('xml').textContent = output.stdout;
+		}
+	})
 });
