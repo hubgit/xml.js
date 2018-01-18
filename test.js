@@ -4,28 +4,18 @@ var filesRoot = 'http://git.macropus.org/jats-dtd/publishing/1.0/';
 
 var statusNode = document.querySelector('#status');
 
-var fetchFile = function(file, root) {
-	return fetch(root + file).then(function(response) {
-		return response.text().then(function(data) {
-			return {
-				path: file,
-				data: data
-			}
-		});
-	});
-};
+var fetchFile = (file, root) => fetch(root + file)
+	.then(response => response.text())
+	.then(data => ({ path: file, data }));
 
 statusNode.textContent = 'Fetching DTD files…';
 
-var fetchIndex = fetchFile('index.txt', filesRoot).then(function(file) {
-	return file.data.trim().split('\n').filter(function(line) {
-		return line;
-	});
-});
+var fetchIndex = fetchFile('index.txt', filesRoot)
+	.then(file => file.data.trim().split('\n').filter(line => line));
 
-var fetchFiles = fetchIndex.then(function(files) {
+var fetchFiles = fetchIndex.then(files => {
 	// fetch the DTD files
-	var requests = files.map(function(file) {
+	var requests = files.map(function (file) {
 		return fetchFile(file, filesRoot);
 	});
 
@@ -33,9 +23,9 @@ var fetchFiles = fetchIndex.then(function(files) {
 	requests.push(fetchFile(xmlPath, './'));
 
 	return Promise.all(requests);
-});
+})
 
-fetchFiles.then(function(files) {
+fetchFiles.then(files => {
 	statusNode.textContent = 'Validating XML…';
 
 	var args = ['--noent', '--dtdvalid', dtdPath, xmlPath];
